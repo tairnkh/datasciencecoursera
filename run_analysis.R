@@ -1,4 +1,4 @@
-#Working directory of script is "UCI HAR Dataset"
+#Working directory for the script is "UCI HAR Dataset"
 
 #load names of feature variables
 features <- read.table("features.txt")
@@ -6,19 +6,19 @@ features <- read.table("features.txt")
 #load activity labels
 activity_lbl <- read.table("activity_labels.txt") 
 
-#load test set
+#load test data set
 subject_test <- read.table("./test/subject_test.txt")
 x_test <- read.table("./test/X_test.txt")
 y_test <- read.table("./test/y_test.txt") 
 test_set <- cbind(subject_test,y_test,x_test)
 
-#load train set
+#load training data set
 subject_train <- read.table("./train/subject_train.txt")
 x_train <- read.table("./train/X_train.txt")
 y_train <- read.table("./train/y_train.txt") 
 train_set <- cbind(subject_train, y_train, x_train)
 
-#merge training and test sets
+#merge training and test data sets
 full_set <- rbind(test_set, train_set)
 
 #extracting only the measurements on the mean and standard deviation for each measurement
