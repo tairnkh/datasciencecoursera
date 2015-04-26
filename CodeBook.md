@@ -1,74 +1,102 @@
-##Getting and Cleaning Data Course Project
-###Code Book for run_analysis.R
+#Getting and Cleaning Data Course Project
 
-Description of variables and transformations:
+### Study design
+The purpose of this project is to process data collected from the accelerometers from the Samsung Galaxy S smartphone.
+A full description of this data is available at the site where the data was obtained:
+http://archive.ics.uci.edu/ml/datasets/Human+Activity+Recognition+Using+Smartphones
 
-* features - data frame for feature variables
-  (loaded from file features.txt);
-* activity_lbl - data frame for activity labels
-  (loaded from file activity_labels.txt);
+The data used in the project is located at: 
+https://d396qusza40orc.cloudfront.net/getdata%2Fprojectfiles%2FUCI%20HAR%20Dataset.zip
 
-* subject_test - data frame for subjects who performed the activity
-  (loaded from file subject_test.txt);
-* x_test - data frame for test set
-  (loaded from file X_test.txt);
-* y_test - data frame for test activity labels
-  (loaded from file y_test.txt);
-* test_set - data frame for all test data set
-  (used cbind to combine data of subject_test,y_test,x_test by columns);
+The raw data contains measurements from smartphones for group of 30 volunteers who perfomed six activities.
+And from that data extracted only the measurements on the mean and standard deviation for each measurement.
+The goal of the project is to prepare tidy data set that contains avarage of each extracted variable for each activity and each subject.
 
-* subject_train - data frame for subjects who performed the activity
-  (loaded from file subject_train.txt)
-* x_train - data frame for training set
-  (loaded from file X_train.txt)
-* y_train - data frame for training activity labels
-  (loaded from file y_train.txt) 
-* train_set - data frame for all training data set
-  (used cbind to combine data of subject_train,y_train,x_train by columns);
+###Tiny data set description
 
-* full_set - data frame that contains data of training and test sets
-  (used rbind to merge training and test data sets);
-
-* mean_std_cols - vector of indexes for features which contain mean and standard
-  deviation for measurements
-  (before the creation of this variable script changes in names of these features:
-   Mean() to Mean and Std() to Std);
-* mean_std_set - data frame containing only the measurements on the mean
-  and standard deviation for each measurement
-  (Data extracted from full_set - Subject, Activity and measurements columns
-  with index in mean_std_cols. After that script sets descriptive names
-  for activities from activity_lbl and column names from features using mean_std_cols);
-
-* avg_set - tiny data set with the average of each variable for each activity
-  and each subject (Aggregate used for creation tiny data set and write.table
-  used for writing this set into "result.txt" file in the working directory).
-
-###Tiny data set contains columns:
-* Subject - identifies the subject who performed the activity.
-            Its range is from 1 to 30;
+The first two colums contains variables:
+* Subject - identifies the subject who performed the activity. Its range is from 1 to 30.
 * Activity - performed activity name: WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS,
-             SITTING, STANDING, LAYING;
+   SITTING, STANDING, LAYING;
 
-  Other columns contains avarage values of mean (Mean in name) and standard deviation
-  (Std in name) for measurements variables.
-  
-  Time domain signals (t):
-* tBodyAcc - body acceleration signals in the X, Y and Z directions;
-* tGravityAcc - gravity acceleration signals in the X, Y and Z directions;
-* tBodyAccJerk - Jerk signals of body linear acceleration in the X, Y and Z directions;
-* tBodyGyro - gyroscope signals in the X, Y and Z directions;
-* tBodyGyroJerk - Jerk signals of angular velocity in the X, Y and Z directions;
-* tBodyAccMag - magnitude of body acceleration signals;
-* tGravityAccMag - magnitude of gravity acceleration signals;
-* tBodyAccJerkMag - magnitude of Jerk signals of body linear acceleration;
-* tBodyGyroMag - magnitude of gyroscope signals;
-* tBodyGyroJerkMag - magnitude of Jerk signals of angular velocity;
-  
-  Fast Fourier Transform (f) applied to some of these signals:
-* fBodyAcc - in the X, Y and Z directions;
-* fBodyAccJerk - in the X, Y and Z directions;
-* fBodyGyro - in the X, Y and Z directions;
-* fBodyAccMag;
-* fBodyAccJerkMag;
-* fBodyGyroMag;
-* fBodyGyroJerkMag.
+Other 66 columns contains avarage values of mean (Mean in name) and standard deviation
+(Std in name) for measurements variables.
+
+The measurements that come from the accelerometer and gyroscope 3-axial raw signals contain name AccX (Y or Z)
+and GyroX (Y or Z).
+
+Prefix 't' in variable name indicates time domain signals.
+Prefix 'f' in variable name indicates frequency domain signals.
+
+Acceleration signal separated into body and gravity acceleration signals: tBodyAccX (Y or Z) and tGravityAccX (Y or Z).
+From body linear acceleration and angular velocity obtained Jerk signals: tBodyAccJerkX (Y or Z) and tBodyGyroJerkX (Y or Z).
+Also the magnitude of these three-dimensional signals contain in the variables name Mag (tBodyAccMag, tGravityAccMag,
+tBodyAccJerkMag, tBodyGyroMag, tBodyGyroJerkMag).
+
+List of  the measurements variables:
+* tBodyAccMeanX
+* tBodyAccMeanY
+* tBodyAccMeanZ
+* tBodyAccStdX
+* tBodyAccStdY
+* tBodyAccStdZ
+* tGravityAccMeanX
+* tGravityAccMeanY
+* tGravityAccMeanZ
+* tGravityAccStdX
+* tGravityAccStdY
+* tGravityAccStdZ
+* tBodyAccJerkMeanX
+* tBodyAccJerkMeanY
+* tBodyAccJerkMeanZ
+* tBodyAccJerkStdX
+* tBodyAccJerkStdY
+* tBodyAccJerkStdZ
+* tBodyGyroMeanX
+* tBodyGyroMeanY
+* tBodyGyroMeanZ
+* tBodyGyroStdX
+* tBodyGyroStdY
+* tBodyGyroStdZ
+* tBodyGyroJerkMeanX
+* tBodyGyroJerkMeanY
+* tBodyGyroJerkMeanZ
+* tBodyGyroJerkStdX
+* tBodyGyroJerkStdY
+* tBodyGyroJerkStdZ
+* tBodyAccMagMean
+* tBodyAccMagStd
+* tGravityAccMagMean
+* tGravityAccMagStd
+* tBodyAccJerkMagMean
+* tBodyAccJerkMagStd
+* tBodyGyroMagMean
+* tBodyGyroMagStd
+* tBodyGyroJerkMagMean
+* tBodyGyroJerkMagStd
+* fBodyAccMeanX
+* fBodyAccMeanY
+* fBodyAccMeanZ
+* fBodyAccStdX
+* fBodyAccStdY
+* fBodyAccStdZ
+* fBodyAccJerkMeanX
+* fBodyAccJerkMeanY
+* fBodyAccJerkMeanZ
+* fBodyAccJerkStdX
+* fBodyAccJerkStdY
+* fBodyAccJerkStdZ
+* fBodyGyroMeanX
+* fBodyGyroMeanY
+* fBodyGyroMeanZ
+* fBodyGyroStdX
+* fBodyGyroStdY
+* fBodyGyroStdZ
+* fBodyAccMagMean
+* fBodyAccMagStd
+* fBodyAccJerkMagMean
+* fBodyAccJerkMagStd
+* fBodyGyroMagMean
+* fBodyGyroMagStd
+* fBodyGyroJerkMagMean
+* fBodyGyroJerkMagStd

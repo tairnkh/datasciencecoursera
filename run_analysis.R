@@ -30,6 +30,8 @@ mean_std_set <- full_set[ ,c(1,2, mean_std_cols+2)]
 #setting descriptive names for activity and feature variables
 mean_std_set[ ,2] <- activity_lbl[mean_std_set[ ,2],2]
 names(mean_std_set) <- c("Subject", "Activity", features[mean_std_cols,2])
+names(mean_std_set) <- gsub("\\-","",names(mean_std_set))
+names(mean_std_set) <- gsub("BodyBody","Body",names(mean_std_set))
 
 #creating data set with the average of each variable for each activity and each subject
 avg_set <- aggregate(x=mean_std_set[,3:ncol(mean_std_set)], by=list(Subject=mean_std_set[,1],Activity=mean_std_set[,2]), FUN="mean")
